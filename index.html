@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioFlix - Seus Produtos Digitais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .banner-slide {
+            animation: slide 15s infinite linear;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .card-container {
+            scroll-behavior: smooth;
+        }
+        
+        .card-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .card-container::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+        
+        .card-container::-webkit-scrollbar-thumb {
+            background: #e50914;
+            border-radius: 3px;
+        }
+        
+        .modal {
+            backdrop-filter: blur(10px);
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .dropdown-content.show {
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen">
+    <!-- Header -->
+    <header class="relative z-50 p-6">
+        <div class="flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-red-600">BioFlix</h1>
+        </div>
+    </header>
+
+    <!-- Banner Frase de Impacto -->
+    <div class="relative h-48 mb-8 bg-gradient-to-r from-red-900 via-red-700 to-red-900 flex items-center justify-center">
+        <div class="text-center px-6">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">
+                🚀 TRANSFORME SUA VIDA DIGITAL
+            </h2>
+            <p class="text-xl md:text-2xl text-red-100 font-medium">
+                Produtos PLR que geram <span class="text-yellow-300 font-bold">PIX DIÁRIOS</span> para você!
+            </p>
+        </div>
+        <!-- Efeito de brilho -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-10 animate-pulse"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex justify-between items-center px-6 mb-8">
+        <button onclick="showContact()" class="text-sm hover:text-red-500 transition-colors">CONTATO</button>
+        
+        <div class="relative">
+            <button onclick="toggleDropdown()" class="text-sm hover:text-red-500 transition-colors flex items-center">
+                MEUS LINKS <span class="ml-1">▼</span>
+            </button>
+            <div id="dropdown" class="dropdown-content absolute top-8 left-1/2 transform -translate-x-1/2 bg-gray-900 rounded-lg p-4 min-w-48">
+                <a href="https://t.me/+suKlJEu92AczOWQ5" target="_blank" class="block py-2 hover:text-red-500">Telegram</a>
+                <a href="https://chat.whatsapp.com/E18Afmr3CG4C2ecm0XoAdK?mode=ems_share_c" target="_blank" class="block py-2 hover:text-red-500">WhatsApp</a>
+            </div>
+        </div>
+        
+        <button onclick="showAbout()" class="text-sm hover:text-red-500 transition-colors">SOBRE MIM</button>
+    </nav>
+
+    <!-- Primeira Seção de Cards -->
+    <section class="mb-12 px-6">
+        <h2 class="text-2xl font-bold mb-6">Produtos em Destaque</h2>
+        <div class="card-container flex gap-6 overflow-x-auto pb-4">
+            <!-- Card Presente -->
+            <div class="card min-w-80 bg-gradient-to-br from-green-600 to-green-800 rounded-lg p-6 cursor-pointer" onclick="openModal('presente')">
+                <div class="h-40 bg-green-500 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">🎁</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Pegue Seu Presente</h3>
+                <p class="text-sm opacity-80">Produtos e conteúdos gratuitos</p>
+            </div>
+
+            <!-- Card PLR -->
+            <div class="card min-w-80 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg p-6 cursor-pointer" onclick="openModal('plr')">
+                <div class="h-40 bg-blue-500 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">📦</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Produtos PLR</h3>
+                <p class="text-sm opacity-80">Loja com direitos de revenda</p>
+            </div>
+
+            <!-- Card Robôs -->
+            <div class="card min-w-80 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg p-6 cursor-pointer" onclick="openModal('robos')">
+                <div class="h-40 bg-purple-500 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">🤖</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Robôs Assistentes</h3>
+                <p class="text-sm opacity-80">8 robôs + bônus personalizado</p>
+            </div>
+
+            <!-- Card Insta Power -->
+            <div class="card min-w-80 bg-gradient-to-br from-pink-600 to-pink-800 rounded-lg p-6 cursor-pointer" onclick="openModal('insta')">
+                <div class="h-40 bg-pink-500 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">📱</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Pack Insta Power</h3>
+                <p class="text-sm opacity-80">250 artes + carrossel infinito</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segunda Seção de Cards -->
+    <section class="mb-12 px-6">
+        <h2 class="text-2xl font-bold mb-6">Soluções Completas</h2>
+        <div class="card-container flex gap-6 overflow-x-auto pb-4">
+            <!-- Card Produtora -->
+            <div class="card min-w-80 bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg p-6 cursor-pointer" onclick="openModal('produtora')">
+                <div class="h-40 bg-orange-500 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">📢</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Telegram Lucrativo</h3>
+                <p class="text-sm opacity-80">Crie sua loja PLR no Telegram</p>
+            </div>
+
+            <!-- Card Plano Estratégico -->
+            <div class="card min-w-80 bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-lg p-6 cursor-pointer" onclick="openModal('plano')">
+                <div class="h-40 bg-indigo-500 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">📋</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Plano Estratégico</h3>
+                <p class="text-sm opacity-80">Reels, stories, posts + estratégias</p>
+            </div>
+
+            <!-- Card Loja Pronta -->
+            <div class="card min-w-80 bg-gradient-to-br from-yellow-600 to-yellow-800 rounded-lg p-6 cursor-pointer" onclick="openModal('loja')">
+                <div class="h-40 bg-yellow-500 rounded-lg mb-4 flex items-center justify-center">
+                    <span class="text-6xl">🏪</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Loja PLR Pronta</h3>
+                <p class="text-sm opacity-80">+200 produtos que geram Pix diários</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="modal" class="modal fixed inset-0 bg-black bg-opacity-80 hidden z-50 flex items-center justify-center p-6">
+        <div class="bg-gray-900 rounded-lg max-w-2xl w-full max-h-96 overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modal-title" class="text-2xl font-bold"></h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+                </div>
+                <p id="modal-description" class="text-gray-300 mb-6"></p>
+                <button id="modal-button" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-semibold transition-colors">
+                    Acessar Produto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Contato -->
+    <div id="contact-modal" class="modal fixed inset-0 bg-black bg-opacity-80 hidden z-50 flex items-center justify-center p-6">
+        <div class="bg-gray-900 rounded-lg max-w-md w-full">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold">Contato</h3>
+                    <button onclick="closeContactModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+                </div>
+                <div class="space-y-4">
+                    <a href="https://wa.me/?text=Ol%C3%A1%20vim%20do%20Instagram.%20Quero%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20plr's%20" target="_blank" class="block bg-green-600 hover:bg-green-700 p-3 rounded-lg text-center transition-colors">
+                        📱 WhatsApp
+                    </a>
+                    <a href="mailto:prlpronta@gmail.com" class="block bg-blue-600 hover:bg-blue-700 p-3 rounded-lg text-center transition-colors">
+                        📧 Email
+                    </a>
+                    <a href="https://t.me/Plrprnta" target="_blank" class="block bg-purple-600 hover:bg-purple-700 p-3 rounded-lg text-center transition-colors">
+                        📱 Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Sobre -->
+    <div id="about-modal" class="modal fixed inset-0 bg-black bg-opacity-80 hidden z-50 flex items-center justify-center p-6">
+        <div class="bg-gray-900 rounded-lg max-w-md w-full">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold">Sobre Mim</h3>
+                    <button onclick="closeAboutModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+                </div>
+                <p class="text-gray-300">
+                    Olá, muito prazer! Sou Andressa, tenho 28 anos, sou mãe e casada. Iniciei minha jornada no digital em 2023 como afiliada e, ao longo do caminho, descobri no PLR o meu verdadeiro propósito. Hoje ajudo outras pessoas a darem seus primeiros passos e estruturarem seus negócios digitais. Seja muito bem-vinda, estou à disposição para o que precisar!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = {
+            presente: {
+                title: "Pegue Seu Presente",
+                description: "Acesse nossa seleção especial de produtos e conteúdos totalmente gratuitos! Inclui templates, e-books, planilhas e muito mais para impulsionar seu negócio digital. Sem pegadinhas, apenas valor real para você começar hoje mesmo.",
+                link: "https://t.me/+suKlJEu92AczOWQ5"
+            },
+            plr: {
+                title: "Produtos PLR",
+                description: "Descubra nossa loja completa de produtos PLR (Private Label Rights) com centenas de itens prontos para revenda. Você pode usar, modificar, vender ou dar como bônus. Inclui e-books, cursos, templates e muito mais com direitos totais de revenda.",
+                link: "https://t.me/+m4e_pT0L9Oo1Y2Ux"
+            },
+            robos: {
+                title: "Robôs Assistentes",
+                description: "8 robôs inteligentes configurados para criar conteúdo, narrativas envolventes, e-books profissionais, páginas de vendas que convertem e muito mais. BÔNUS EXCLUSIVO: Aprenda a criar sua própria assistente personalizada para suas necessidades específicas.",
+                link: "https://andressa-cristina-nunes-sales-e08a.herospark.co/robos"
+            },
+            insta: {
+                title: "Pack Insta Power",
+                description: "Pack completo com 250 artes profissionais em 5 cores diferentes para bombar seu Instagram. Inclui carrossel infinito para engajamento máximo e bônus especiais para turbinar sua presença nas redes sociais.",
+                link: "https://andressa-cristina-nunes-sales-e08a.herospark.co/combo-insta-power"
+            },
+            produtora: {
+                title: "Telegram Lucrativo",
+                description: "Aprenda do zero como criar e gerenciar sua própria loja PLR no Telegram. Inclui produtos iniciais para você começar imediatamente, estratégias de vendas e automações para gerar renda passiva.",
+                link: "https://pay.kiwify.com.br/ZRIlttK?afid=zsBoWaJk"
+            },
+            plano: {
+                title: "Plano Estratégico",
+                description: "Tenha tudo pronto: reels, stories, posts, estratégia para encher grupos, tudo só para baixar e postar. Mais bônus: loja PLR para você começar imediatamente seu negócio digital com conteúdo profissional.",
+                link: "https://pay.cakto.com.br/35gucmw_534747?affiliate=h9ydUF6W"
+            },
+            loja: {
+                title: "Loja PLR Pronta",
+                description: "Mais de 200 produtos PLR selecionados que geram Pix diários para empreendedores. Loja completa e otimizada para o Telegram, com produtos testados e aprovados pelo mercado. Comece a vender hoje mesmo!",
+                link: "https://andressa-cristina-nunes-sales-e08a.herospark.co/loja-plr-para-copiar-e-colar"
+            }
+        };
+
+        function openModal(productKey) {
+            const product = products[productKey];
+            document.getElementById('modal-title').textContent = product.title;
+            document.getElementById('modal-description').textContent = product.description;
+            document.getElementById('modal-button').onclick = () => window.open(product.link, '_blank');
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        function showContact() {
+            document.getElementById('contact-modal').classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contact-modal').classList.add('hidden');
+        }
+
+        function showAbout() {
+            document.getElementById('about-modal').classList.remove('hidden');
+        }
+
+        function closeAboutModal() {
+            document.getElementById('about-modal').classList.add('hidden');
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdown');
+            const button = event.target.closest('button');
+            
+            if (!button || !button.onclick || button.onclick.toString().indexOf('toggleDropdown') === -1) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Fechar modais com ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+                closeContactModal();
+                closeAboutModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978941298787f1e5',t:'MTc1Njc3Njc1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
